@@ -1,4 +1,4 @@
-\section{Newton-Verfahren}
+\heading{Newton-Verfahren}
 Lösungsverfahren für nichtlineare GS\\
 \textbf{Gesucht x*}: $f(x^*) = 0_N$, f nichtlinear,
 $f_1(x_1^*, ..., x_N^* = 0)$, ..., $f_N(x_1^*, ..., x_N^* = 0)$\\
@@ -11,8 +11,11 @@ $f_1(x_1^*, ..., x_N^* = 0)$, ..., $f_N(x_1^*, ..., x_N^* = 0)$\\
 Oft divergent, falls $||x^0 - x^*||$ groß\\
 \textbf{Konvergenz}: $||x^* - x^k|| \leq C||x^*-x^{k-1}||^2$, d.h. die Anzahl an Nachkommastellen verdoppelt sich ca. pro Schritt\\
 \textbf{Funktionen}: $x_{n+1} = x_n - f'(x_n)^{-1}f(x_n)$
+\textbf{Gedämpft}: 
+$x^{k+1}=x^k-t_kf'(x^k)^{-1}f(x^{k})$
 \subsection{Vereinfachung}
 Konstante Matrix A, sodass $A \approx f'(x^0)$, dann gilt $F(x) = x - A^{-1}f(x)$.\\
 1 x LR-Zerlegung, \textbf{linear konvergent}\\
 \textbf{Fixpunkt}: $x^{k+1} = x^k-A^{-1}f(x^k) = F(x^k)$
+
 

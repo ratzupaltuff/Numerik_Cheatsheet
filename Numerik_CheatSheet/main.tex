@@ -16,6 +16,8 @@
 \usepackage{amsmath}
 \usepackage{tcolorbox}
 \usepackage{pdfpages}
+\usepackage{tcolorbox}
+\pdfminorversion=7
 
 \let\bar\overline
 
@@ -44,11 +46,32 @@ linecolor=gray,linewidth=1pt,%
 leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
 }
 
+%%%  VERSION %%%
+\newcommand{\cheatsheetversion}{1.3}
+
+\setcounter{section}{-1}
+\tcbset{
+    boxrule=0mm,
+    boxsep=0.5mm,
+    arc=2mm, 
+    %outer arc=1mm, 
+    colframe=black,
+    colupper=white,
+    top=0mm,
+    bottom=0mm,
+    left=2mm,
+    right=0mm,
+    enlarge top initially by=-1mm
+    enlarge bottom finally by=-1.5mm
+}
+\newcommand{\heading}[1]{\begin{tcolorbox}[colback=myblue]\section{#1}\end{tcolorbox}}
+%\newcommand{\heading}[1]{\section{#1}}
+
 \newcommand{\header}{
 \begin{mdframed}[style=header]
 \footnotesize
 \sffamily
-Falls nicht anders angegeben: $A \in \mathbf{R}^{nxm}$ und $x,y \in \mathbf{R}$, ex. = existiert \hspace*{8mm} Seite ~\thepage~
+Falls nicht anders angegeben: $A \in \mathbf{R}^{nxm}$ und $x,y \in \mathbf{R}$, ex. = existiert \hspace*{2mm} Seite ~\thepage~ v\cheatsheetversion
 \end{mdframed}
 }
 
@@ -56,7 +79,7 @@ Falls nicht anders angegeben: $A \in \mathbf{R}^{nxm}$ und $x,y \in \mathbf{R}$,
 \renewcommand{\section}{\@startsection{section}{1}{0mm}%
                                 {.2ex}%
                                 {.2ex}%x
-                                {\color{myblue}\sffamily\small\bfseries}}
+                               {\color{white}\sffamily\small\bfseries}}
 \renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
                                 {.2ex}%
                                 {.2ex}%x

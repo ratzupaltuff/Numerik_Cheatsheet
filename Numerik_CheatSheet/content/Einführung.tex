@@ -1,4 +1,4 @@
-\section{Einführung}
+\heading{Einführung}
 \textbf{Kriterien}: Genauigkeit, Stabilität,\\
 Effizienz, Voraussetzungen\\
 \textbf{Pi Approximation}: stabil\\
@@ -15,8 +15,9 @@ Es gilt: $|m| \geq B^{-1}$ und $|m| < 1$\\
 $ = 2^4 * (1*2^{-1} + 0*2^{-2} + ... + 1*2^{-6})$\\
 Somit ist $ e = 4, a_{1} = 1, L_{m} \geq 6$\\
 Es gilt: $e_{max} = e_{min} + B^{L_e} -1$\\
-$maxFL = -minFL = B^{e_{max}}(1-B^{-L_m})$\\
-$minFL_+ = B^{e_{min}-1}$
+$maxFL = B^{e_{max}}(1-B^{-L_m}) \approx 10^{308}$\\
+$minFL_+ = B^{e_{min}-1} \approx 10^{-308}$ bei 11e52m\\
+$eps = \frac{(B^{1-L_m)}}{2} = 2^{-52} \approx 2.2 * 10^{-16}$
 \subsection{Rundung}
 $x \neq 0$ mit $minFL_+ \leq |x| \leq maxFL$, $fl(x) =\\ \pm B^e\left\{
 \begin{array}{ll}

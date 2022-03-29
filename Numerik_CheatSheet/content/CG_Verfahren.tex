@@ -1,14 +1,17 @@
-\section{Iterative Verfahren für LGS}
+\heading{Iterative Verfahren für LGS}
 Effiziente Lsg. eines LGS ($Ax = b$), wobei A sehr groß und dünn besetzt\\
-\textbf{Vorkonditionierer}: $B \in \mathbf{R}^{NxN}$, regulär, $cond(B^{-1}A) < cond(A)$\\
-Es gilt: $0 = -B^{-1}Ax + B^{-1}b$\\
+\textbf{Vorkonditionierer}: $B \in \mathbf{R}^{NxN}$, regulär, $cond(B^{-1}A) < cond(A)$. $A = L + D + R$\\ 
+Jacobi: $B=D$, Gauß-Seidel: $B = L + D$\\
+Es gilt: $0 = -B^{-1}Ax + B^{-1}b$. $Bc = r$ leichtr\\
+Fixpunktiteration: $x^{k+1} = x^k + B^{-1}r^k$ mit $r^k = b - Ax^k$,
+$\rho(I_N - D^{-1}A)<1\Rightarrow$ konv. \\
 \textbf{Algorithmus zur Lösung}:\\
 1) Wähle Start $x^0 \in \mathbf{R}^N$, Toleranz $\epsilon > 0$\\
 2) Setze $r^0 = b - Ax^0$, $k = 0$\\
 3) Falls $(||r^{k+1} \leq \epsilon||b||)$ STOP, ansonsten:\\
 \hspace*{5mm}$Bc^k = r^k$\\
-\hspace*{5mm}$x^{k+1} = x^k + c^k$\\
-\hspace*{5mm}$r^{k+1} = r^k - Ac^k$\\
+\hspace*{5mm}$x^{k+1} = x^k + c^k = x^k + B^{-1}r^k$\\
+\hspace*{5mm}$r^{k+1} = r^k - Ac^k = b - Ax^{k+1}$\\
 4) Erhöhe k um 1 und gehe zu 3)
 
 

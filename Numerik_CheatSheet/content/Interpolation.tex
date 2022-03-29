@@ -1,4 +1,4 @@
-\section{Interpolation}
+\heading{Interpolation}
 Stützpunkte $f_n$ gegeben, Funktion $p$\\ gesucht für die $p(x_n) = f_n$ und\\
 $\int_a^b (f(x) - p(x))^2dx = min!$ gilt\\
 \subsection{Polynom}
@@ -26,7 +26,8 @@ $p = 1 + 5(x + 1)- 7(x + 1)x + \frac{11}{4}(x+1)x(x-1)$\\
 $\rightarrow$ falls x Stützpunkt, dann 0\\
 \textbf{Tschebyscheff}: Approximation von $f$ mit möglichst günstigen Stützstellen\\
 $T_n(x) = cos(n*arccos(x))$ | $T_0(x) = 1$, $T_1(x) = x, T_{n+1}(x) = 2x * T_n(x) - T_{n-1}(x)$\\
-$max_{x \in [-1, 1]}|w_{N+1}(x)$ min. mit $2^{-N}$\\
+$max_{x \in [-1, 1]}|w_{N+1}(x)|$ min. mit $2^{-N}$\\
+\newpage
 \textbf{Interpolationsformel}: $N + 1$ Stützstellen, eindeutiges Polynom gegeben durch:\\
 $p(x) = \frac{1}{2}c_0 + c_1T_1(x) + ... + c_NT_N(x)$ mit
 $c_m = \frac{2}{N + 1}\sum_{n=0}^N f_n cos(m * \pi * \frac{2n + 1}{2N + 2})$ für $m = 0,...,N$ ($(N + 1)^2$ Multiplikationen)\\

@@ -1,14 +1,13 @@
-\section{Integration}
-\textbf{Rechteckregel}: $I(f) \approx (b-a)f(a)$\\
-\textbf{Mittelpunkt}: $I(f) \approx (b-a)f(\frac{a+b}{2})$\\
-\textbf{Trapezregel}: $I(f) \approx (b-a)(\frac{f(a) + f(b)}{2})$\\
-\mbox{\textbf{Simpson}: $I(f) \approx \frac{b-a}{6}(f(a) + 4f(\frac{a+b}{2}) + f(b))$}\\
-- $\int_a^bf(x)dx = \int_a^cf(x)dx + \int_c^bf(x)dx$\\
+\heading{Integration}
+\textbf{Rechteckregel}: $I(f) \approx (b-a)f(a)$ \hfill p=1\\
+\textbf{Mittelpunkt}: $I(f) \approx (b-a)f(\frac{a+b}{2})$ \hfill p=2\\
+\textbf{Trapezregel}: $I(f) \approx (b-a)(\frac{f(a) + f(b)}{2})$ \hfill p=2\\
+\mbox{\textbf{Simpson}: $\frac{b-a}{6}(f(a) + 4f(\frac{a+b}{2}) + f(b))$ p=4}\\
 - linear: $I(\lambda f + \mu g) = \lambda I(f) + \mu I(g)$\\
 \mbox{- monoton: $f \geq g \Rightarrow \int_a^bf(x)dx \geq \int_a^bg(x)dx$}\\
 $\rightarrow |\int_a^bf(x)dx| \leq \int_a^b|f(x)|dx$ (Bsp. Sinus)
 \textbf{Kondition}: L1-Norm: $||f||_1 = I(|f|)$
-Es gilt: $\frac{|I(f) - I(\widetilde{f})|}{|(f)|} \leq \frac{||f-\widetilde{f||_1}}{||f||_1}$ mit $cond_1 := \frac{I(|f|)}{|I(f)|}$ (monoton und linear), schlecht konditioniert falls oszillierend
+Es gilt: $\frac{|I(f) - I(\widetilde{f})|}{|(f)|} \leq cond_1 \frac{||f-\widetilde{f||_1}}{||f||_1}$ mit $cond_1 := \frac{I(|f|)}{|I(f)|}$ (monoton und linear), schlecht konditioniert falls oszillierend
 \subsection{Quadraturformeln}
 $\int_a^bf(x)dx \approx (b-a)\sum_{k=1}^s b_kf(a + c_k(b-a))$, $b_k$ Gewichte und $c_k$ Knoten $\in [0,1]$\\
 linear und monoton $\leftrightarrow b_k \geq 0$, eindeutig\\
@@ -35,3 +34,6 @@ $I(f)_0^1\approx \frac{5 * f(\frac{1}{2} - \frac{\sqrt{15}}{10})}{18} + \frac{4}
 \textbf{Quadraturfehler}:  $g(\tau) := f(a + \tau(b-a))$\\
 $R(g) = \int_0^1 g(\tau)d\tau - \sum_{k=1}^s b_kg(c_k)$, linear\\
 Abschätzung: $R(g) = (\frac{b-a}{N})^2 (b-a) \frac{f^{(2)}(\xi)}{12}$
+\textbf{Sum.QF:} $\sum_{n=1}^Nh_n\sum_{k=1}^sb_kf(x_{n-1}+c_kh_n)$\\
+tf: $h_n^{p+1}max_{x\in[x_{n-1},x_n]}|f^{(p)}(x)|\int_0^1|K_p(t)|dt$
+%$(b-a)max_{n=1,...,N}err_n$

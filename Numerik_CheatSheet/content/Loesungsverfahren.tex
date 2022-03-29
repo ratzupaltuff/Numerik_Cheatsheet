@@ -1,4 +1,4 @@
-\section{Lösungsverfahren}
+\heading{Lösungsverfahren}
 Finde x, sodass $Ax = b$, wobei $A \in \mathbb{R}^{NxN}$\\
 $x = A^{-1}b \rightarrow$ teuer\\
 Falls Matrix nicht regulär $\rightarrow$ keine oder inf. Lösungen. A regulär $\leftrightarrow$ det(A) $\neq$ 0\\
@@ -26,31 +26,63 @@ A ist spd-Matrix $\Leftrightarrow$ Cholesky Z. existiert\\
 3) \textbf{RWS}: $L^Tx = y$\\
 $A^T = (LL^T)^T = (L^T)^TL^T = LL^T = A$\\
 \mbox{$x^TAx = x^TLL^Tx = (L^Tx)^TL^Tx = y^Ty > 0$}\\
-Für eine 4x4-Matrix gilt:\\
-$l_{11} = \sqrt{a_{11}}$ \textbf{;} $l_{21} = \frac{a_{21}}{l_{11}}$, $l_{22} = \sqrt{a_{22} - l^2_{21}}$ \textbf{;}\\
-$l_{31} = \frac{a_{31}}{l_{11}}$, $l_{32} = \frac{a_{32}-l_{31}l_{21}}{l_{22}}$,\\ $l_{33} = \sqrt{a_{33} - (l^2_{31} + l^2_{32})}$ \textbf{;}\\
-$l_{41} = \frac{a_{41}}{l_{11}}$,
-$l_{42} = \frac{a_{42}-l_{41}l_{21}}{l_{22}}$,\\
-$l_{43} = \frac{a_{43}-l_{41}l_{31} + l_{42}l_{32}}{l_{33}}$,\\ $l_{44} = \sqrt{a_{44} - (l^2_{41} + l^2_{42} + l^2_{43})}$\\
+\[\left(\begin{array}{cc}
+A_{11} & a_{21} \\
+a_{21}^T & a_{22} \\
+\end{array}\right) =
+\left(\begin{array}{cc}
+L_{11} &  \\
+l_{21}^T & l_{22} \\
+\end{array}\right)
+\left(\begin{array}{cc}
+L_{11}^T & l_{21} \\
+ & l_{22} \\
+\end{array}\right)
+= LL^T
+\]
+1. $L_{11}l_{21} = a_{21}$ Vorwärtssub mit Lsg. $l_{21}$\\
+2. $a_{22} = l_{21}^Tl_{21}+l_{22}^2$or $l_{22} = \sqrt{a_{22}-l_{21}^Tl_{21}}$\\
+%Für eine 4x4-Matrix gilt:\\
+%$l_{11} = \sqrt{a_{11}}$ \textbf{;} $l_{21} = \frac{a_{21}}{l_{11}}$, $l_{22} = \sqrt{a_{22} - l^2_{21}}$ \textbf{;}\\
+%$l_{31} = \frac{a_{31}}{l_{11}}$, $l_{32} = \frac{a_{32}-l_{31}l_{21}}{l_{22}}$,\\ %$l_{33} = \sqrt{a_{33} - (l^2_{31} + l^2_{32})}$ \textbf{;}\\
+%$l_{41} = \frac{a_{41}}{l_{11}}$,
+%$l_{42} = \frac{a_{42}-l_{41}l_{21}}{l_{22}}$,\\
+%$l_{43} = \frac{a_{43}-l_{41}l_{31} + l_{42}l_{32}}{l_{33}}$,\\ $l_{44} = \sqrt{a_{44} - (l^2_{41} + l^2_{42} + l^2_{43})}$\\
 \textbf{Tipp}: Bandstruktur bleibt erhalten
-\subsection{QR-Zerlegung} 
+\subsection{QR-Zerlegung}
 Sei A eine MxN Matrix $\Leftrightarrow A = QR$, wobei $Q \in \mathbb{R}^{MxM}$ orthogonal ($QQ^T = I_M$) und  $R \in \mathbb{R}^{NxN}$ eine obere Dreiecksmatrix.\\
 1) \textbf{Householder-Trans}: $A = QR$\\
 2) \textbf{Löse}: $Qc = b$ durch $c = Q^Tb$\\
 3) \textbf{Rückwärtssubstitution}: $Rx = c$\\
 \textbf{Begründung}: $Ax = QRx = Qc = b$\\
 \mbox{\textbf{Eigenschaften}: stabil, $\frac{2}{3}N^3$ wenn $M \approx N$}\\
-$Q = I_M - 2ww^T$ wobei $w \in \mathbb{R}^M$, $w^Tw = 1$\\
+\textbf{Householder:} $Q = I_M - 2ww^T$ mit $w \in \mathbb{R}^M$, $w^Tw = 1$,
 Q ist sym. da $Q^T = I_M^T - (2ww^T)^T = Q$,
 orthogonal da $QQ^T = Q^2 = I_M -4ww^T + 4w * 1 * w^T = I_M (w^Tw = 1)$, Spiegelung da $Q\lambda w = -\lambda w$ für $w^Ty = 0 \rightarrow Qy = y$\\
-\textbf{Ziel}: $H^{(k)}*...*H^{(1)}*A = R$, wobei $H^{(n)}$ orthogonal\\
-\textbf{Schritte}: $v^{(1)} = q_1 + sgn(a_{11}) * ||a_1|| * e_1$\\
-$H^{(1)} = H^{(0)} = I - \frac{2v^{(1)}v^{(1)^T}}{v^{(1)^T}v^{(1)}}$\\
-$A^{(1)} = H^{(1)}*A$\\
-Erste Zeile und Spalte streichen\\
-$H^{(2)}$ in der ersten Zeile und Spalte um $e_1$ erweitern\\
-$H^{(2)} = H^{(2)}A^{(1)}$ ... Für R: (m-1) mal\\
-$Q^T = H^{(2)}H^{(1)} \rightarrow Q = (Q^T)^T$ 
+\textbf{Ziel}: $Q^{(k)}*...*Q^{(1)}*A = R$, wobei $Q^{(n)}$ orthogonal\\
+\[w = \frac{v - \sigma e^1}{||v - \sigma e^1||_2}, \hspace{0.2em} \sigma = 
+\begin{cases}
+-||v||_2, falls v_1 > 0,\\
+||v||_2, \hspace{0.5em} falls v_1 \leq 0. \\
+\end{cases}
+\]
+\[
+w^N := \left(\begin{array}{c}
+0_{N-1} \\
+\tilde{w}^N \\
+\end{array}\right) \in \mathbb{R}^M, \hspace{0.2em} Q_N := \left(\begin{array}{cc}
+I_{N-1} & 0 \\
+0 & \tilde{Q}_N \\
+\end{array}\right)
+\]
+
+%$v^{(1)} = q_1 + sgn(a_{11}) * ||a_1|| * e_1$\\
+%$Q^{(1)} = Q^{(0)} = I - \frac{2v^{(1)}v^{(1)^T}}{v^{(1)^T}v^{(1)}}$\\
+%$A^{(1)} = Q^{(1)}*A$\\
+%Erste Zeile und Spalte streichen\\
+%$Q^{(2)}$ in der ersten Zeile und Spalte um $e_1$ erweitern\\
+%$Q^{(2)} = Q^{(2)}A^{(1)}$ ... Für R: (m-1) mal\\
+%$Q^T = Q^{(2)}Q^{(1)} \rightarrow Q = (Q^T)^T$ 
 
 \subsection{Kondition}
 Empfindlichkeit von Matrix-Störungen\\
@@ -65,12 +97,13 @@ $\frac{||x - \widetilde{x}||}{||x||} \leq ||A||*||A^{-1}||*\frac{||b-\widetilde{
 \textbf{Konditionszahl}: $cond(A) := ||A||*||A^{-1}||$\\
 \textbf{Eigenschaften}: $1 \leq cond(A)$, $cond(A) = \\cond(\alpha A)$, mit \mbox{$\alpha \neq 0$, $cond(A) = cond(A^{-1})$}\\
 $cond(A) = \frac{max_{||y|| = 1}||Ay||}{min_{||z|| = 1}||Az||}$ (allg. Definition)\\
+Rang A max: $cond_2(A^TA) = (cond_2(A))^2$\\
 Matrizen $B^TB$ wobei B beliebig:\\
 - sind spezielle sym. Matrizen\\
 - haben nur nichtnegative (inkl. 0) EW\\
 - nur positive EW falls B maximaler Rang\\
 - besitzen EW $\lambda^2$ falls B sym. mit EW $\lambda$\\
-$\Rightarrow cond_2(A) = \frac{max\{|\lambda|:\; \lambda \text{ EW von A}\}}{min\{|\lambda|:\; \lambda \text{ EW von A}\}}$\\
+A spd $\Rightarrow cond_2(A) = \frac{max\{|\lambda|:\; \lambda \text{ EW von A}\}}{min\{|\lambda|:\; \lambda \text{ EW von A}\}}$\\
 \mbox{Sei $\frac{||A-\widetilde{A}||}{||A||} \leq \epsilon_A$ und $\frac{||b-\widetilde{b}||}{||b||} \leq \epsilon_b$, dann gilt:}\\
 \mbox{$\frac{||x-\widetilde{x}||}{||x||} \leq \frac{cond(A) * (\epsilon_A + \epsilon_b)}{1-\epsilon_A * cond(A)}$, $\epsilon_A * cond(A) < 1$}\\ 
 \textbf{gute Kondition}: $I_n$ ($cond(A)_2$ = 1),\\ $||\text{orthogonale Matrizen}||_2 = 1$, Spline-\\ \mbox{Interpol., $cond(A)$ klein $\Rightarrow$ LGS gut kond.}\\
@@ -88,26 +121,8 @@ Sei $A \in \mathbb{R}^{MxN}$ mit $M \geq N$ und $Q, R$ die QR-Zerlegung, also $Q
 \subsection{Singulärwertzerlegung}
 Sei $A \in \mathbb{R}^{MxN}$ mit Rang $r$,
 \textbf{Zerlegung}: $A = U * \Sigma * V^T$, wobei $U \in \mathbb{R}^{MxM}$ und $V \in \mathbb{R}^{NxN}$ orthogonal,  $\Sigma \in \mathbb{R}^{MxN}$ mit Singulärwerten ($s_n \geq ... \geq s_r > 0$)\\
-\begin{onehalfspace}$AA^T = U\Sigma V^TV\Sigma^TU^T = U\Sigma \Sigma^TU^T$ und\\
-$A^TA = V\Sigma^TU^TU\Sigma V^T = V\Sigma^T \Sigma V^T$
-\end{onehalfspace}
-\textbf{Beispiel $U' = A*A^T$, $V' = A^T*A$}:
-\[ A = \left( \begin{array}{cc}
-1 & 0 \\
-0 & 1 \\
-1 & 1
-\end{array} \right)
-\rightarrow \Sigma =
-\left( \begin{array}{cc}
-s_1 & 0 \\
-0 & s_2 \\
-0 & 0
-\end{array} \right) , U' = 
-\left(\begin{array}{ccc}
-1 & 0 & 1\\
-0 & 1 & 1\\
-1 & 1 & 2
-\end{array} \right)\]
-\mbox{$\lambda_1 = 3 (s_1 = \sqrt{3})$, $\lambda_2 = 1 (s_2 = \sqrt{1})$, $\lambda_3 = 0$}\\
-Eigenräume ausrechnen, analog mit \\$V'$. V und U sind normierte Eigenräume.\\
+$AA^T = U\Sigma V^TV\Sigma^TU^T = U\Sigma \Sigma^TU^T$ und\\
+$A^TA = V\Sigma^TU^TU\Sigma V^T = V\Sigma^T \Sigma V^T$ \\
+$x = \sum_{r=1}^R\frac{(u^r)^Tb}{\sigma_r}v^r$ Lsg. mit $||x||_2=min!$\\
+$A=\sum_{r=1}^R\sigma_ru^r(v^r)^T$\\ %=U\sum_{r=1}^R\sigma_re^r(e^r)^TV^T
 $||A||_{Frob} = \sqrt{Spur(A^TA)} = \sqrt{\sigma_1^2 + ... + \sigma_r^2}$
